@@ -24,7 +24,7 @@ robot.end_of_arm.move_to('wrist_pitch', np.radians(10))
 robot.push_command()
 robot.wait_command()
 
-robot.end_of_arm.move_to('wrist_roll', np.radians(10))
+robot.end_of_arm.move_to('wrist_roll', np.radians(60))
 robot.push_command()
 robot.wait_command()
 
