@@ -10,10 +10,12 @@ class MyNode(hm.HelloNode):
 
     def main(self):
         hm.HelloNode.main(self, 'my_node', 'my_node', wait_for_first_pointcloud=False)
-        # my_node's main logic goes here
-    
+        
+        time.sleep(1)
+        
         print("Stowing robot...")
         self.stow_the_robot()
+        time.sleep(1)
 
         print("Extending arm and lift...")
         self.move_to_pose({
@@ -32,6 +34,7 @@ class MyNode(hm.HelloNode):
 
         print("Closing gripper...")
         self.move_to_pose({'joint_gripper_finger_left': 0.0}, blocking=True)
+        time.sleep(1)
 
         print("Moving head...")
         self.move_to_pose({
@@ -41,16 +44,22 @@ class MyNode(hm.HelloNode):
 
         print("Stowing again...")
         self.stow_the_robot()
-        time.sleep(3)
+        time.sleep(2)
 
         print("Driving base...")
         self.move_to_pose({'translate_mobile_base': 0.5}, blocking=True)
-        self.move_to_pose({'rotate_mobile_base': np.pi}, blocking=True)
-        self.move_to_pose({'translate_mobile_base': 0.5}, blocking=True)
+        time.sleep(0.5)
 
+        self.move_to_pose({'rotate_mobile_base': np.pi}, blocking=True)
+        time.sleep(0.5)
+        
+        self.move_to_pose({'translate_mobile_base': 0.5}, blocking=True)
+        time.sleep(1)
+
+        print("Done!")
         self.destroy_node()
         rclpy.shutdown()
-        print("Done!")
 
-node = MyNode()
-node.main()
+if __name__ == '__main__':
+    node = MyNode()
+    node.main()
